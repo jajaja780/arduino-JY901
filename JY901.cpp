@@ -256,6 +256,39 @@ double CJY901::getYaw()
 		return JY901_data.angle.yaw / (32768.0/180.0);
 }
 
+void CJY901::setRollBias()
+{
+	if (transferMode_)
+		readRegisters(address_, JY_Roll, 2, (uint8_t *)&JY901_data.angle.roll_bias);
+}
+
+void CJY901::setPitchBias()
+{
+	if (transferMode_)
+		readRegisters(address_, JY_Pitch, 2, (uint8_t *)&JY901_data.angle.pitch_bias);
+}
+
+void CJY901::setYawBias()
+{
+	if (transferMode_)
+		readRegisters(address_, JY_Yaw, 2, (uint8_t *)&JY901_data.angle.yaw_bias);
+}
+
+double CJY901::getCorrectedRoll()
+{
+	return this->getRoll() - JY901_data.angle.roll_bias / (32768.0/180.0);
+}
+
+double CJY901::getCorrectedPitch()
+{
+	return this->getPitch() - JY901_data.angle.pitch_bias / (32768.0/180.0);
+}
+
+double CJY901::getCorrectedYaw()
+{
+	return this->getYaw() - JY901_data.angle.yaw_bias / (32768.0/180.0);
+}
+
 
 // double CJY901::getTemp()
 // {

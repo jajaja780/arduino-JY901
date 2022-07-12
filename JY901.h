@@ -40,6 +40,16 @@ class CJY901
 	double   getRoll();
 	double   getPitch();
 	double   getYaw();
+
+	// add angle bias functionality
+	void setRollBias();
+	void setPitchBias();
+	void setYawBias();
+
+	double getCorrectedRoll();
+	double getCorrectedPitch();
+	double getCorrectedYaw();
+
 	int32_t  getPressure();                         //获取压力
 	int32_t  getAltitude();                         //获取高度
 	int16_t  getD0Status();                         //获取端口输出
@@ -98,6 +108,11 @@ class CJY901
 			int16_t pitch;
 			int16_t yaw;
 			int16_t temperature;
+
+			// added biases
+			int16_t roll_bias;
+			int16_t pitch_bias;
+			int16_t yaw_bias;
 		}angle;
 		struct
 		{
